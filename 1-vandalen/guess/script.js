@@ -12,30 +12,23 @@ window.onload = function(){
 		console.log("Du gissade: " + number); // Detta nummer är det som användaren gissade på.
 			
 		// Plats för förändring.
-		
-		if (isNaN(number)) { // Not a Number.
+		if (isNaN(number)){ // Not a Number.
   			return [false, "Ange ett heltal."];
 		}
-		if(number < 1 || number > 100){
+		else if (number < 1 || number > 100){
 			return [false, "Talet är utanför intervallet 1 - 100"];
 		}
-		if(+number === secret){ // +:et för int och === istället för ==.
+		else if (+number === secret){ // +:et för int och === istället för ==.
 			return [true, "Grattis du vann! Det hemliga talet var " + secret + " och du behövde " + guesses + " gissningar för att hitta det."];
 		}
-		else if(number < secret){
+		else if (number < secret){
 			guesses++;
 			return [false, "Det hemliga talet är högre!"];
 		}
-		else if(number > secret){
+		else {
 			guesses++;
 			return [false, "Det hemliga talet är lägre!"];
 		}
-		
-		// Returnera exempelvis: 
-		// [true, "Grattis du vann! Det hemliga talet var X och du behövde Y gissningar för att hitta det."]
-		// [false, "Det hemliga talet är högre!"]
-		// [false, "Det hemliga talet är lägre!"]
-		// [false, "Talet är utanför intervallet 0 - 100"]		
 	};
 	
 	// ------------------------------------------------------------------------------
@@ -51,7 +44,7 @@ window.onload = function(){
 	submit.addEventListener("click", function(e){
 		e.preventDefault(); // Hindra formuläret från att skickas till servern. Vi hanterar allt på klienten.
 
-		var answer = guess(input.value) // Läser in talet från textrutan och skickar till funktionen "guess"
+		var answer = guess(input.value); // Läser in talet från textrutan och skickar till funktionen "guess"
 		p.innerHTML = answer[1];		// Skriver ut texten från arrayen som skapats i funktionen.	
 
 		if(answer[0] === true){				// Om spelet är slut, avaktivera knappen.
