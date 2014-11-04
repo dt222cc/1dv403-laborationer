@@ -11,7 +11,9 @@ window.onload = function(){
 			throw new Error("Fältet är tomt! Skriv in en text.");
 		}
 		
-		// För varje tecken i strängen.
+		/* 	För varje tecken i strängen.
+			Funderade tidigare över att använda for (var i = 0; i < str.length; i++)
+			istället för nuvarande struktur.	*/
 		for (var char in str){
     	
 		  	if (str.charAt(char) === "A" || str.charAt(char) === "a"){
