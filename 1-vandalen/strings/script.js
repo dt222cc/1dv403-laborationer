@@ -27,6 +27,7 @@ window.onload = function(){
 	        	newStr += str.charAt(char).toUpperCase();
 	        }
     	}
+    	// Returnera den konverterade strängen.
     	return newStr;
 	};
 	// ------------------------------------------------------------------------------
