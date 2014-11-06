@@ -24,14 +24,7 @@ window.onload = function(){
 				}
 				
 				// Räknar ut och returnerar antalet dagar till nästa födelsedag. 
-				return Math.floor(Math.abs((nextBirthday.getTime() - today.getTime()) / (oneDay))); // Returnerar antalet dagar.
-				
-				// Test, istället för setHours()
-				// var days = Math.floor(Math.abs((nextBirthday.getTime() - today.getTime()) / (oneDay) + 1));
-				// if (days === 365){
-				// 	return (days = 0);
-				// }
-				// return days;
+				return Math.floor(Math.abs((nextBirthday.getTime() - today.getTime()) / (oneDay)));
 			}
 			
 			// Om det inmatade datumet är inte i formatet "åååå-mm-dd".
