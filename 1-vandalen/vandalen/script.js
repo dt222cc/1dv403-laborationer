@@ -9,8 +9,9 @@
     	var minAge;
         var maxAge;
     	var averageAge;
-    	
+        
         // Returnerar resultat.
+        result = {minAge: minAge, maxAge: maxAge, averageAge: averageAge, names: names};
         return result;
     };
     
