@@ -10,6 +10,13 @@
         var maxAge;
     	var averageAge;
         
+        // Samlar alla namn i en plats.
+        names = persArr.map(function (eachpers){return eachpers.name;})
+            // Sortera namnen - TODO: Ä, Å, Ö till Å, Ä, Ö.
+            .sort()
+            // Sätter ihop dem, istället för ny rad för varje namn.
+            .join(", ");
+            
         // Returnerar resultat.
         result = {minAge: minAge, maxAge: maxAge, averageAge: averageAge, names: names};
         return result;
