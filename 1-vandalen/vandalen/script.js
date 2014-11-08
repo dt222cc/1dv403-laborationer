@@ -2,35 +2,26 @@
 
     var makePerson = function(persArr){
         
-        // Variabler som kan behövas.
-        var result = {};
-        var names;
-    	var ages;
-        var maxAge;
-    	var minAge;
-    	var averageAge;
-    	var sum;
-        
         // Osäker på hur man ska lägga upp koden, testar med denna.
         // Samlar alla namn i en plats.
-        names = persArr.map(function(eachpers){return eachpers.name;
+        var names = persArr.map(function(eachpers){return eachpers.name;
             // Sortera namnen.
         }) .sort(function(a,b){return a.localeCompare(b);
         }) .join(", "); // Sätter ihop egenskaperna till en objekt.
         
         // Samlar alla ålder i en plats.
-        ages = persArr.map(function(eachage){return eachage.age;});
+        var ages = persArr.map(function(eachage){return eachage.age;});
         
-        maxAge = Math.max.apply(Math, ages); // Väljer ut det högsta åldern.
+        var maxAge = Math.max.apply(Math, ages); // Väljer ut det högsta åldern.
        
-        minAge = Math.min.apply(Math, ages); // Väljer ut det minsta åldern.
+        var minAge = Math.min.apply(Math, ages); // Väljer ut det minsta åldern.
         
         // Kalkylerar medelåldern.
-        sum = ages.reduce(function(a, b){return a + b});
-        averageAge = Math.round(sum / ages.length); 
+        var sum = ages.reduce(function(a, b){return a + b});
+        var averageAge = Math.round(sum / ages.length); 
         
         // Returnerar resultat.
-        result = {minAge: minAge, maxAge: maxAge, averageAge: averageAge, names: names};
+        var result = {minAge: minAge, maxAge: maxAge, averageAge: averageAge, names: names};
         return result;
     };
     
