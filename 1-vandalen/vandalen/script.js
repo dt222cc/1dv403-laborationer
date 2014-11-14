@@ -2,15 +2,24 @@
 
     var makePerson = function(persArr){
         
-        // Osäker på hur man ska lägga upp koden, testar med denna struktur.
-        // Samlar alla namn i en plats.
-        var names = persArr.map(function(eachpers){return eachpers.name;
-            // Sortera namnen.
-        }) .sort(function(a,b){return a.localeCompare(b);
+        // Samlar alla namn på en plats.
+        var names = persArr.map(function(eachpers){
+            if (typeof eachpers.name !== "string"){
+			    throw "Data type error";
+		    }
+		    return eachpers.name;
+        }) .sort(function(a,b){return a.localeCompare(b); // Sortera namnen.
         }) .join(", "); // Sätter ihop egenskaperna till en objekt.
         
-        // Samlar alla ålder i en plats.
-        var ages = persArr.map(function(eachage){return eachage.age;});
+        // Samlar alla ålder på en plats.
+        var ages = persArr.map(function(eachage){
+            if (typeof eachage.age !== "undefined"){
+    			if (typeof eachage.age !== "number"){
+    				throw "Data type error";
+    			}
+		    }
+            return eachage.age;
+        });
         
         var maxAge = Math.max.apply(Math, ages); // Väljer ut det högsta åldern.
        
@@ -27,8 +36,7 @@
     
     // För att testa resultatet.
     var data = [{name: "John Häggerud", age: 37}, {name: "Johan Leitet", age: 36}, {name: "Mats Loock", age: 46}];
-	var result = makePerson(data);
-	
+    var result = makePerson(data);
     console.log(result);
     
     // Referenser
