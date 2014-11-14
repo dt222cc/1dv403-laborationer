@@ -3,7 +3,6 @@
 window.onload = function(){
 
 	var birthday = function(date){
-
 			// Tar emot det angivna datumet och returnerar antalet dagar kvar till nästa födelsedag.
 			if (Date.parse(date)){
 				
@@ -33,8 +32,8 @@ window.onload = function(){
 			}
 			
 	};
+	
 	// ------------------------------------------------------------------------------
-
 
 	// Kod för att hantera utskrift och inmatning. Denna ska du inte behöva förändra
 	var p = document.querySelector("#value"); // Referens till DOM-noden med id="#value"
@@ -67,6 +66,7 @@ window.onload = function(){
 	
 	});
 
-
-
 };
+
+// Referenser
+// https://developer.mozilla.org/en-US/search?q=date

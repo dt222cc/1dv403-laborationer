@@ -2,11 +2,10 @@
 
 window.onload = function(){
 	
-	// var secret = 50; // Detta tal behöver bytas ut mot ett slumpat tal.
+	// Slumpar ett tal mellan 1 och 100.
 	var secret = Math.floor((Math.random() * 100) + 1);
 	var guesses = 1;
 	
-	// I denna funktion ska du skriva koden för att hantera "spelet"
 	var guess = function(number){
 		console.log("Det hemliga talet: " + secret); // Du når den yttre variabeln secret innifrån funktionen.
 		console.log("Du gissade: " + number); // Detta nummer är det som användaren gissade på.
@@ -18,7 +17,7 @@ window.onload = function(){
 		else if (number < 1 || number > 100){
 			return [false, "Talet är utanför intervallet 1 - 100"];
 		}
-		else if (+number === secret){ // +:et för int och === istället för ==.
+		else if (+number === secret){ // +:et för Number och === istället för ==.
 			return [true, "Grattis du vann! Det hemliga talet var " + secret + " och du behövde " + guesses + " gissningar för att hitta det."];
 		}
 		else if (number < secret){
@@ -32,8 +31,6 @@ window.onload = function(){
 	};
 	
 	// ------------------------------------------------------------------------------
-
-
 
 	// Kod för att hantera utskrift och inmatning. Denna ska du inte behöva förändra
 	var p = document.querySelector("#value"); // Referens till DOM-noden med id="#value"
@@ -52,4 +49,10 @@ window.onload = function(){
 		}
 	
 	});
+	
 };
+
+// Referenser
+// toUpperCase	- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase
+// toLowerCase	- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase
+// charAt		- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt

@@ -2,7 +2,6 @@
 
 window.onload = function(){
 
-	// I denna funktion ska du skriva koden för att hantera "spelet"
 	var convertString = function(str){
 		var newStr = "";
 		
@@ -11,29 +10,29 @@ window.onload = function(){
 			throw new Error("Fältet är tomt! Skriv in en text.");
 		}
 		
-		/* 	För varje tecken i strängen.
-			Funderade tidigare över att använda for (var i = 0; i < str.length; i++)
-			istället för nuvarande struktur.	*/
+		/* 	
+		 * För varje tecken i strängen.
+		 * Eller (var i = 0; i < str.length; i++)
+		 */
 		for (var char in str){
-    	
+	  		// Om tecknen är "A" eller "a" omvandlas den till "#".
 		  	if (str.charAt(char) === "A" || str.charAt(char) === "a"){
-		  		// Alla "A" och "a" omvandlas till "#".
 	    		newStr += "#";
 	    	}
+	    	// Om tecknen är UpperCase omvandlas den till LowerCase.
 	    	else if (str.charAt(char) === str.charAt(char).toUpperCase()){
-	        	// Om tecken är UpperCase omvandlas den till LowerCase.
 	            newStr += str.charAt(char).toLowerCase();
 	        }
+        	// Annars (då den är LowerCase) omvandlas den till UpperCase.
 	        else {
-	        	// Annars (då den är LowerCase) omvandlas till UpperCase.
 	        	newStr += str.charAt(char).toUpperCase();
 	        }
     	}
     	// Returnera den konverterade strängen.
     	return newStr;
 	};
+	
 	// ------------------------------------------------------------------------------
-
 
 	// Kod för att hantera utskrift och inmatning. Denna ska du inte behöva förändra
 	var p = document.querySelector("#value"); // Referens till DOM-noden med id="#value"
@@ -55,7 +54,9 @@ window.onload = function(){
 		}
 	
 	});
-
-
-
 };
+
+// Referenser
+// toUpperCase	- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase
+// toLowerCase	- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase
+// charAt		- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt

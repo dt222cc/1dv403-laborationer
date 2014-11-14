@@ -4,11 +4,12 @@
         
         // Samlar alla namn på en plats.
         var names = persArr.map(function(eachpers){
+            // Felinmatning.
             if (typeof eachpers.name !== "string"){
 			    throw "Data type error";
 		    }
 		    return eachpers.name;
-        }) .sort(function(a,b){return a.localeCompare(b); // Sortera namnen.
+        }) .sort(function(a,b){return a.localeCompare(b); // Sortering av namn.
         }) .join(", "); // Sätter ihop egenskaperna till en objekt.
         
         // Samlar alla ålder på en plats.
