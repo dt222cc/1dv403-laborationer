@@ -47,8 +47,6 @@ main {
     color: gray;
     text-align: right;
     font-size: 0.5em;
-    padding: 5px;
-    margin: 10px 0 5px 10px;
 }
 
 textarea {
