@@ -1,9 +1,12 @@
 body {
     background-color: #A0BEEA;
+    font-family: verdana;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 header {
-    font-size: 1.5em;
+    font-size: 1.3em;
     text-align: center;
     color: #0099FF;
 }
@@ -12,18 +15,55 @@ header span {
     color: #c09;
 }
 
+.header-beta {
+    float: right;
+    margin-top: -130px;
+    margin-right: -40px;
+}
+
 main {
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
 }
 
 #board {
-    margin-left: auto;
-    margin-right: auto;
     background-color: white;
     width: 100%;
     padding: 10px;
     float: left;
     margin: 10px;
 }
+
+.messages {
+    color: gray;
+    background-color: #B2F0B2;
+    border: 1px solid;
+    border-color: #4DFF4D;
+    font-size: 0.8em;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+    
+#amountOfMessages {
+    color: gray;
+    text-align: right;
+    font-size: 0.5em;
+    padding: 5px;
+    margin: 10px 0 5px 10px;
+}
+
+textarea {
+    width: 478px;
+    padding: 10px;
+    font-size: 1em;
+}
+
+input {
+    float: right;
+}
+
+/*
+ * -TODO list-
+ * Klocka, radera ikon
+ * Datum text
+ * Skugga (reflektion och fade effekt)
+ */
