@@ -2,12 +2,24 @@
 
 window.onload = function(){
 
-    // Skapa meddelanden, test (funkar)
-    var mess = new Message("Testmeddelande", new Date());
+    var messages = [];
+    var mess = {};
     
-    alert(mess);
-    alert(mess.getText());
+    // Skapa meddelanden
+    mess = new Message("Första meddelanden", new Date());
+    messages.push(mess);
+    
+    // Testar första objekt i arrayen
+    console.log(messages[0].toString());
+    
+    // Testar andra objekt i arrayen
+    var mess2 = new Message("Andra meddelanden", new Date());
+    messages.push(mess2);
+    console.log(messages[1].toString());
+    
+    // Andra tester
+    console.log(mess.getText());
     mess.setText("En annan text");
-    alert(mess);
-    alert(mess.getText());
+    console.log(mess.getText());
+    console.log(mess.getDate());
 };
