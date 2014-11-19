@@ -2,7 +2,7 @@
 
 function Message(message, date){
     
-    // Konstruktor för meddelanden
+    // Constructors for messages
     this.getText = function(){
         return message;
     };
@@ -11,7 +11,7 @@ function Message(message, date){
         message = _text;
     };
     
-    // Konstruktor för datum
+    // Constructors for dates
     this.getDate = function(){
         return date;
     };
@@ -21,18 +21,17 @@ function Message(message, date){
     };
 }
     
-    // Strängrepresentation av objektet
+    // String representation of the object
     Message.prototype.toString = function(){
         return this.getText() +" ("+this.getDate()+")";
     };
     
-    // Hämtar texten med \n och byter ut den mot <br />
+    // Replaces text with \n and \r to <br />
     Message.prototype.getHTMLText = function(){
-        return this.getText().replace(/\n/g, "<br>");
-        // http://stackoverflow.com/questions/5076466/javascript-replace-n-with-br
+        return this.getText().replace(/[\n\r]/g, "<br>");
     };
     
     // 
     Message.prototype.getDateText = function(){
-        return " ("+this.getDate()+")"; // Ska modifieras vidare? bort med GMT
+        return " ("+this.getDate()+")";
     };

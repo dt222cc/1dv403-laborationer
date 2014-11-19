@@ -5,21 +5,18 @@ window.onload = function(){
     var messages = [];
     var mess = {};
     
-    // Skapa meddelanden
-    mess = new Message("Första meddelanden", new Date());
-    messages.push(mess);
+    // Reference to the text field
+    var textArea = document.getElementById("area");
     
-    // Testar första objekt i arrayen
-    console.log(messages[0].toString());
+    // Reference to the send button
+    var submitButton = document.getElementById("button");
     
-    // Testar andra objekt i arrayen
-    var mess2 = new Message("Andra meddelanden", new Date());
-    messages.push(mess2);
-    console.log(messages[1].toString());
-    
-    // Andra tester
-    console.log(mess.getText());
-    mess.setText("En annan text");
-    console.log(mess.getText());
-    console.log(mess.getDate());
+    // Skicka meddelanden
+    submitButton.onclick = function createMessage(){
+        
+        mess = new Message(textArea.value, new Date());
+        messages.push(mess);
+        
+        console.log(messages[0].toString());
+    };
 };
