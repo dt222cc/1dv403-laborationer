@@ -17,56 +17,58 @@ window.onload = function(){
         renderMessages(); // Render messages
         renderAmountOfMessages(); // Update messages counter
     };
-        
+    
+    // Renders all messages
     var renderMessages = function(){
         
         var i;
         
-        board.innerHTML = ""; // Remove all messages before rendering new
-        // Render all messages
+        board.innerHTML = ""; // Remove all messages before rendering new ones
+        
         for(i = 0; i < messages.length; ++i){
             renderMessage(i);
         }
     };
     
+    // Renders a message
     var renderMessage = function(messageID){
         
-        var text;
+        var message;
         var removeMessage;
         var timeStamp;
 
-        // Render text
-        text = document.createElement("div"); // Create a new div element
-        text.className = "message"; // Add class name
-        text.innerHTML = messages[messageID].getHTMLText(); // Add text
-        board.appendChild(text); // Place inside the div element at the end
+        // Render the text
+        message = document.createElement("div"); // Create a new div element as "the" message
+        message.className = "message"; // Add class name
+        message.innerHTML = messages[messageID].getHTMLText(); // Add text to message
+        board.appendChild(message); // Place message inside the "container"
         
-        // Creating delete icon
+        // Create a delete icon for the message
         removeMessage = document.createElement("img"); // Create a new img element
         removeMessage.src = "pics/delete.png"; // Add source
         removeMessage.className = "messageIcons";
         removeMessage.alt = "delete message"; // Add alt text
-        text.appendChild(removeMessage); // Place inside the message
+        message.insertBefore(removeMessage, message.firstChild);// Place inside the message
+
+        // Create a clock icon for the message
+        timeStamp = document.createElement("img");
+        timeStamp.src = "pics/clock.png";
+        timeStamp.className = "messageIcons";
+        timeStamp.alt = "show time written";
+        message.insertBefore(timeStamp, message.firstChild);
         
-        // Delete message/messages
+        // Delete message on click (confirm window)
         removeMessage.addEventListener("click", function(){ // Testing with .addEventListener
-            if (window.confirm("Är du säker på att du vill radera meddelandet?")){
+            if (window.confirm("Vill du verkligen radera meddelandet?")){
                 messages.splice(messageID, 1); // Remove message from array
                 renderMessages(); // Uppdate messages
                 renderAmountOfMessages(); // Update message counter
             }
         });
         
-        // Creating clock icon
-        timeStamp = document.createElement("img");
-        timeStamp.src = "pics/clock.png";
-        timeStamp.className = "messageIcons";
-        timeStamp.alt = "show time written";
-        text.appendChild(timeStamp);
-        
-        // Show time
-        removeMessage.addEventListener("click", function(){
-            
+        // Show time on click (alert window)
+        timeStamp.addEventListener("click", function(){
+            window.alert("Inlägget skapades " + messages[messageID].getDateText()); // Get the object's creation date
         });
     };
     
