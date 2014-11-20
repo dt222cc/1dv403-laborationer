@@ -70,6 +70,7 @@ window.onload = function(){
                 messages.splice(messageID, 1); // Remove message from array
                 renderMessages(); // Uppdate messages
                 renderAmountOfMessages(); // Update message counter
+                console.log(messages.toString()); // Console log
             }
         });
         

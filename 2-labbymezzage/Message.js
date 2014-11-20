@@ -35,7 +35,7 @@ function Message(message, date){
         return this.getText().replace(/[\n\r]/g, "<br>");
     };
     
-    // Modify date text?
+    // Configures date text
     Message.prototype.getDateText = function(){
         return " ("+this.getDate()+")";
     };
