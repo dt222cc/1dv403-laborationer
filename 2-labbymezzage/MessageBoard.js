@@ -36,12 +36,19 @@ window.onload = function(){
         var message;
         var removeMessage;
         var timeStamp;
+        var timeParagraph;
 
         // Render the text
         message = document.createElement("div"); // Create a new div element as "the" message
         message.className = "message"; // Add class name
         message.innerHTML = messages[messageID].getHTMLText(); // Add text to message
         board.appendChild(message); // Place message inside the "container"
+        
+        // Render "time" text
+        timeParagraph = document.createElement("p");
+        timeParagraph.className = "time";
+        timeParagraph.innerHTML = messages[messageID].getTime();
+        message.appendChild(timeParagraph);
         
         // Create a delete icon for the message
         removeMessage = document.createElement("img"); // Create a new img element
@@ -66,7 +73,7 @@ window.onload = function(){
             }
         });
         
-        // Show time on click (alert window)
+        // Show date/time written, on click (alert window)
         timeStamp.addEventListener("click", function(){
             window.alert("Inlägget skapades " + messages[messageID].getDateText()); // Get the object's creation date
         });

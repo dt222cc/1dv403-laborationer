@@ -19,6 +19,10 @@ function Message(message, date){
     this.setDate = function(_date){
         date = _date;
     };
+    
+    this.getTime = function(){
+        return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    };
 }
     
     // String representation of the object

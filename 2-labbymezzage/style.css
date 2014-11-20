@@ -42,7 +42,13 @@ main {
     padding: 5px 5px 15px 5px;
     margin-bottom: 5px;
 }
-    
+
+.time {
+    text-align: right;
+    font-size: 0.6em;
+    margin-bottom: -10px;
+}
+
 .messageIcons {
     float: right;
     margin: -2px;
