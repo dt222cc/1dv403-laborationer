@@ -27,7 +27,7 @@ function Message(message, date){
     
     // String representation of the object
     Message.prototype.toString = function(){
-        return this.getText() +" ("+this.getDate()+")";
+        return this.getText() + " ("+this.getDate() + ")";
     };
     
     // Replaces text with \n and \r to <br />
@@ -35,7 +35,7 @@ function Message(message, date){
         return this.getText().replace(/[\n\r]/g, "<br>");
     };
     
-    // Configures date text
+    // Configures date text - TODO: remove timezone (if necessary)
     Message.prototype.getDateText = function(){
-        return " ("+this.getDate()+")";
+        return " (" + this.getDate() + ")";
     };

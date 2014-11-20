@@ -10,12 +10,20 @@ window.onload = function(){
     
     // Submit button creates a new message
     submitButton.onclick = function createMessage(){
-        
-        mess = new Message(textArea.value, new Date()); // Create a new object with text (from textArea) and date
-        messages.push(mess); // Add object to array
+        mess = new Message(textArea.value, new Date()); // Creates a new object with text (from textArea) and date
+        messages.push(mess); // Adds object to array
         console.log(messages.toString()); // Console log
-        renderMessages(); // Render messages
-        renderAmountOfMessages(); // Update messages counter
+        renderMessages(); // Renders messages
+        renderAmountOfMessages(); // Updates messages counter
+    };
+    
+    // Pressing enter creates a new message, shift+enter doesn't
+    textArea.onkeypress = function(key){
+        // The key code for enter is 13
+        if (key.keyCode === 13 && key.shiftKey === false){
+            key.preventDefault(); // Prevents making a new line when pressing enter
+            submitButton.onclick(); // Calls the createMessage function
+        }
     };
     
     // Renders all messages
@@ -23,7 +31,7 @@ window.onload = function(){
         
         var i;
         
-        board.innerHTML = ""; // Remove all messages before rendering new ones
+        board.innerHTML = ""; // Removes all messages before rendering new ones
         
         for(i = 0; i < messages.length; ++i){
             renderMessage(i);
@@ -38,49 +46,49 @@ window.onload = function(){
         var timeStamp;
         var timeParagraph;
 
-        // Render the text
-        message = document.createElement("div"); // Create a new div element as "the" message
-        message.className = "message"; // Add class name
-        message.innerHTML = messages[messageID].getHTMLText(); // Add text to message
-        board.appendChild(message); // Place message inside the "container"
+        // Renders the text
+        message = document.createElement("div"); // Creates a new div element as "the" message
+        message.className = "message"; // Adds class name
+        message.innerHTML = messages[messageID].getHTMLText(); // Adds text to message
+        board.appendChild(message); // Puts the message inside the "container"
         
-        // Render "time" text
+        // Renders the "time" text
         timeParagraph = document.createElement("p");
         timeParagraph.className = "time";
         timeParagraph.innerHTML = messages[messageID].getTime();
         message.appendChild(timeParagraph);
         
-        // Create a delete icon for the message
-        removeMessage = document.createElement("img"); // Create a new img element
-        removeMessage.src = "pics/delete.png"; // Add source
+        // Creates a delete icon for the message
+        removeMessage = document.createElement("img"); // Creates a new img element
+        removeMessage.src = "pics/delete.png"; // Adds source
         removeMessage.className = "messageIcons";
-        removeMessage.alt = "delete message"; // Add alt text
-        message.insertBefore(removeMessage, message.firstChild);// Place inside the message
+        removeMessage.alt = "delete message"; // Adds alt text
+        message.insertBefore(removeMessage, message.firstChild);// Puts the icon inside the message
 
-        // Create a clock icon for the message
+        // Creates a clock icon for the message
         timeStamp = document.createElement("img");
         timeStamp.src = "pics/clock.png";
         timeStamp.className = "messageIcons";
         timeStamp.alt = "show time written";
         message.insertBefore(timeStamp, message.firstChild);
         
-        // Delete message on click (confirm window)
+        // Deletes message on click (with confirm window)
         removeMessage.addEventListener("click", function(){ // Testing with .addEventListener
             if (window.confirm("Vill du verkligen radera meddelandet?")){
-                messages.splice(messageID, 1); // Remove message from array
-                renderMessages(); // Uppdate messages
-                renderAmountOfMessages(); // Update message counter
+                messages.splice(messageID, 1); // Removes message from array
+                renderMessages(); // Updates messages
+                renderAmountOfMessages(); // Updates message counter
                 console.log(messages.toString()); // Console log
             }
         });
         
-        // Show date/time written, on click (alert window)
+        // Shows the written date/time, on click (with alert window)
         timeStamp.addEventListener("click", function(){
-            window.alert("Inlägget skapades " + messages[messageID].getDateText()); // Get the object's creation date
+            window.alert("Inlägget skapades " + messages[messageID].getDateText()); // Gets the object's creation date
         });
     };
     
-    // Update messages counter
+    // Updates messages counter
     var renderAmountOfMessages = function(){
         
         var amount;
