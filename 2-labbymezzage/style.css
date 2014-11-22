@@ -27,8 +27,10 @@ header span {
     background-color: white;
     width: auto;
     padding: 10px;
+    overflow: hidden; /* Fix for submit button */
 }
 
+/*----------------------------------------------------------*/
 .message {
     background-color: #B2F0B2;
     border: 1px solid;
@@ -36,7 +38,12 @@ header span {
     font-size: 0.8em;
     padding: 5px 5px 15px 5px;
     margin-bottom: 5px;
-    word-wrap: break-word;
+    word-wrap: break-word; /* Breaks longer words */
+}
+
+.messageP {
+    max-width: 90%;
+    margin: 2px;
 }
 
 .time {
@@ -61,15 +68,16 @@ textarea {
     width: 96%;
     padding: 10px;
     font-size: 1em;
-    margin-bottom: 5px;
-    resize: none;
+    resize: none; /* Removes resize element, bottom right corner */
 }
 
 textarea:focus {
-    background-color: #A0BEEA;
+    background-color: #E0FFC2;
 }
 
 input {
     float: right;
-    margin-top: -9px;
+    height: 30px;
 }
+
+/* Issue: resizing to smaller size = textarea's right side margin disappears */

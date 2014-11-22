@@ -43,14 +43,18 @@ window.onload = function(){
     var renderMessage = function(messageID){
         
         var message;
+        var messageParagraph;
         var removeMessage;
         var timeStamp;
         var timeParagraph;
 
         // Renders the text
-        message = document.createElement("div"); // Creates a new div element as "the" message
+        message = document.createElement("div"); // Creates a new div element as "the" message¨
         message.className = "message"; // Adds class name
-        message.innerHTML = messages[messageID].getHTMLText(); // Adds text to message
+        messageParagraph = document.createElement("p"); // Creates p element for text
+        messageParagraph.className = "messageP";
+        messageParagraph.innerHTML = messages[messageID].getHTMLText(); // Adds text to paragraph
+        message.appendChild(messageParagraph); // Adds paragraph to message
         board.appendChild(message); // Puts the message inside the "container"
         
         // Renders the "time" text
