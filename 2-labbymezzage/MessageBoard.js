@@ -15,6 +15,7 @@ window.onload = function(){
         console.log(messages.toString()); // Console log
         renderMessages(); // Renders messages
         renderAmountOfMessages(); // Updates messages counter
+        textArea.value = ""; // Clear textArea after a submit
     };
     
     // Pressing enter creates a new message, shift+enter doesn't
