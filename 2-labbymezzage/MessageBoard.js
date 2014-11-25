@@ -20,8 +20,7 @@ window.onload = function(){
     
     // Pressing enter creates a new message, shift+enter doesn't
     textArea.onkeypress = function(key){
-        // The key code for enter is 13
-        if (key.keyCode === 13 && key.shiftKey === false){
+        if (key.keyCode === 13 && key.shiftKey === false){ // The key code for enter is 13
             key.preventDefault(); // Prevents making a new line when pressing enter
             submitButton.onclick(); // Calls the createMessage function
         }
@@ -42,40 +41,40 @@ window.onload = function(){
     // Renders a message
     var renderMessage = function(messageID){
         
-        var message;
-        var messageParagraph;
-        var removeMessage;
-        var timeStamp;
-        var timeParagraph;
-
-        // Renders the text
-        message = document.createElement("div"); // Creates a new div element as "the" message¨
-        message.className = "message"; // Adds class name
-        messageParagraph = document.createElement("p"); // Creates p element for text
+        var message = document.createElement("div"); // "The" message
+        var messageParagraph = document.createElement("p"); // Text
+        var timeParagraph = document.createElement("p"); // Time text
+        var a = document.createElement("a");  // Link for timeStamp
+        var a2 = document.createElement("a");  // Link for removeMessage
+        var removeMessage = document.createElement("img"); // Delete message
+        var timeStamp = document.createElement("img"); // Show date and time
+        
+        // Configuration
+        message.className = "message";
+        
         messageParagraph.className = "messageP";
         messageParagraph.innerHTML = messages[messageID].getHTMLText(); // Adds text to paragraph
-        message.appendChild(messageParagraph); // Adds paragraph to message
-        board.appendChild(message); // Puts the message inside the "container"
         
-        // Renders the "time" text
-        timeParagraph = document.createElement("p");
-        timeParagraph.className = "time";
-        timeParagraph.innerHTML = messages[messageID].getTime();
-        message.appendChild(timeParagraph);
+        timeParagraph.className = "timeP";
+        timeParagraph.innerHTML = messages[messageID].getTime(); // Time in 00:00:00
         
-        // Creates a delete icon for the message
-        removeMessage = document.createElement("img"); // Creates a new img element
-        removeMessage.src = "pics/delete.png"; // Adds source
-        removeMessage.className = "messageIcons";
-        removeMessage.alt = "delete message"; // Adds alt text
-        message.insertBefore(removeMessage, message.firstChild);// Puts the icon inside the message
+        removeMessage.src = "pics/delete.png";
+        removeMessage.alt = "delete message";
 
-        // Creates a clock icon for the message
-        timeStamp = document.createElement("img");
         timeStamp.src = "pics/clock.png";
-        timeStamp.className = "messageIcons";
         timeStamp.alt = "show time written";
-        message.insertBefore(timeStamp, message.firstChild);
+        
+        a.setAttribute("href", "#");
+        a2.setAttribute("href", "#");
+        
+        // Inserting
+        a.appendChild(timeStamp);
+        a2.appendChild(removeMessage);
+        message.appendChild(a2);
+        message.appendChild(a);
+        message.appendChild(messageParagraph);
+        message.appendChild(timeParagraph);
+        board.appendChild(message);
         
         // Deletes message on click (with confirm window)
         removeMessage.addEventListener("click", function(){ // Testing with .addEventListener
@@ -96,12 +95,10 @@ window.onload = function(){
     // Updates messages counter
     var renderAmountOfMessages = function(){
         
-        var amount;
-        var amountParagraph;
+        var amount = document.getElementById("amountOfMessages");
+        var amountParagraph = document.createElement("p");
         
-        amount = document.getElementById("amountOfMessages");
         amount.innerHTML = "";
-        amountParagraph = document.createElement("p");
         amountParagraph.innerHTML = "Antal meddelanden : " + messages.length;
         amount.appendChild(amountParagraph);
     };

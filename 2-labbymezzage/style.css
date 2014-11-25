@@ -46,15 +46,18 @@ header span {
     margin: 2px;
 }
 
-.time {
+.timeP {
     text-align: right;
     font-size: 0.6em;
     margin-bottom: -10px;
 }
 
-.messageIcons {
+.message a {
     float: right;
-    margin-left: 2px;
+}
+
+.message a:focus {
+    background-color: black;
 }
 
 /*----------------------------------------------------------*/
