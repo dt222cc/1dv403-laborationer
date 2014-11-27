@@ -7,7 +7,6 @@ var Memory = {
     
     init: function(){
         
-        console.log("4 * 4 = 16");
         var newGame = RandomGenerator.getPictureArray(rows, cols); // Retrieves and stores an array
         console.log(newGame);
         
@@ -41,9 +40,30 @@ var Memory = {
                 img.src = "pics/0.png";
                 
                 a.appendChild(img), td.appendChild(a), tr.appendChild(td);
+                
+                this.clickEvent(a);
             }
         }
-    }
+    },
+    
+    clickEvent: function(a){
+        
+        // Mouse click
+        a.addEventListener("click", function(){
+            console.log("Hej");
+        });
+        
+        // Keypress, enter
+        a.addEventListener("keydown", function(key){
+            if (key.keyCode === 13){
+                // console.log("extra"); // bug: adds mouse click aswell
+                // Works empty, why?
+            }
+        });
+        
+    },
+    
+    
 };
 
 window.onload = Memory.init;
