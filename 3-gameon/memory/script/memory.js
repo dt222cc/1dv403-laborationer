@@ -2,12 +2,12 @@
 
 var Memory = {
     
-    pictures: [],
-    
     init: function(){
         
-        console.log("'ello");
-    }
+        console.log("4 * 4 = 16");
+        var newGame = RandomGenerator.getPictureArray(4, 4); // Fetch and store array (rows, columns)
+        console.log(newGame);
+    },
     
 };
 
