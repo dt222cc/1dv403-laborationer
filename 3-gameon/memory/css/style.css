@@ -1,0 +1,17 @@
+#board {
+	background: black;
+	width: 200px;
+	height: 200px;
+	margin: 10px;
+	padding: 10px;
+	border: 6px solid #9b3b00;
+}
+
+body {
+	font-family: 'Schoolbell', arial, serif;
+	background: #849644;
+}
+
+h1 {
+    margin-left: 50px;
+}
