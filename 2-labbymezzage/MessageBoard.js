@@ -75,10 +75,10 @@ var MessageBoard = {
         timeP.innerHTML = (MessageBoard.messages[messageID].getDate().toLocaleTimeString()); // Time in 00:00:00
         
         
-        removeIcon.src = "pics/delete.png";
+        removeIcon.src = "delete.png";
         removeIcon.alt = "delete message";
-        timeIcon.src = "pics/clock.png";
-        timeIcon.alt = "show time written";
+        timeIcon.src = "clock.png";
+        timeIcon.alt = "creation date";
         
         a.setAttribute("href", "#");
         a2.setAttribute("href", "#");
