@@ -54,11 +54,13 @@ header span {
 
 .message a {
     float: right;
+    margin-top: -5px;
 }
 
 .message a:focus {
     background-color: black;
 }
+
 
 /*----------------------------------------------------------*/
 #amountOfMessages {

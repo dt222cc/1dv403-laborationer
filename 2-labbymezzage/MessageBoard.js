@@ -9,19 +9,25 @@ window.onload = function(){
     var submitButton = document.getElementById("button"); // Reference to the send button
     
     // Submit button creates a new message
-    submitButton.onclick = function createMessage(){
+    submitButton.onclick = function sendMessage(){
         mess = new Message(textArea.value, new Date()); // Creates a new object with text (from textArea) and date
+        
+        // Text area can not be empty
+        if (textArea.value === ""){
+            return false;
+        }
+        
         messages.push(mess); // Adds object to array
         console.log(messages.toString()); // Console log
         renderMessages(); // Renders messages
         renderAmountOfMessages(); // Updates messages counter
-        textArea.value = ""; // Clear textArea after a submit
+        textArea.value = ""; // Clears textArea after a submit
     };
     
     // Pressing enter creates a new message, shift+enter doesn't
     textArea.onkeypress = function(key){
         if (key.keyCode === 13 && key.shiftKey === false){ // The key code for enter is 13
-            key.preventDefault(); // Prevents making a new line when pressing enter
+            key.preventDefault(); // Prevents new line when pressing enter
             submitButton.onclick(); // Calls the createMessage function
         }
     };
@@ -67,7 +73,7 @@ window.onload = function(){
         a.setAttribute("href", "#");
         a2.setAttribute("href", "#");
         
-        // Inserting
+        // Appending
         a.appendChild(timeStamp);
         a2.appendChild(removeMessage);
         message.appendChild(a2);
@@ -77,7 +83,7 @@ window.onload = function(){
         board.appendChild(message);
         
         // Deletes message on click (with confirm window)
-        removeMessage.addEventListener("click", function(){ // Testing with .addEventListener
+        removeMessage.addEventListener("click", function(){ // With addEventListener
             if (window.confirm("Vill du verkligen radera meddelandet?")){
                 messages.splice(messageID, 1); // Removes message from array
                 renderMessages(); // Updates messages
@@ -88,7 +94,8 @@ window.onload = function(){
         
         // Shows the written date/time, on click (with alert window)
         timeStamp.addEventListener("click", function(){
-            window.alert("Inlägget skapades " + messages[messageID].getDateText()); // Gets the object's creation date
+            // Gets the object's creation date
+            window.alert("Inlägget skapades " + messages[messageID].getDateText());
         });
     };
     
