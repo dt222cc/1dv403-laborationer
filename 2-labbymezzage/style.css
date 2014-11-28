@@ -1,6 +1,6 @@
 /*----------------------------------------------------------*/
 body {
-    background-color: #A0BEEA;
+    background: #A0BEEA;
     font-family: verdana;
     max-width: 600px;
     margin: auto;
@@ -24,7 +24,7 @@ header span {
 
 /*----------------------------------------------------------*/
 #board {
-    background-color: white;
+    background: white;
     width: auto;
     padding: 10px;
     overflow: hidden; /* Fix for submit button */
@@ -32,9 +32,8 @@ header span {
 
 /*----------------------------------------------------------*/
 .message {
-    background-color: #B2F0B2;
-    border: 1px solid;
-    border-color: #4DFF4D;
+    background: #B2F0B2;
+    border: 1px solid #4DFF4D;
     font-size: 0.8em;
     padding: 5px 5px 15px 5px;
     margin-bottom: 5px;
@@ -56,11 +55,6 @@ header span {
     float: right;
     margin-top: -5px;
 }
-
-.message a:focus {
-    background-color: black;
-}
-
 
 /*----------------------------------------------------------*/
 #amountOfMessages {
@@ -85,4 +79,13 @@ input {
     height: 30px;
 }
 
+/*----------------------------------------------------------*/
+
+footer {
+    text-align: center;
+    font-size: 0.8em;
+    color: black;
+}
+
+/*----------------------------------------------------------*/
 /* Issue: resizing to smaller size = textarea's right side margin disappears */

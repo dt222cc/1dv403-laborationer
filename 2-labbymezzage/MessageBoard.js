@@ -39,7 +39,7 @@ window.onload = function(){
         
         board.innerHTML = ""; // Removes all messages before rendering new ones
         
-        for(i = 0; i < messages.length; ++i){
+        for (i = 0; i < messages.length; ++i){
             renderMessage(i);
         }
     };
