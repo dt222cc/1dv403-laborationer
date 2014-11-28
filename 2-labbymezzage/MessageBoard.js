@@ -4,7 +4,7 @@ var MessageBoard = {
     
     messages: [],
     
-    init: function(){
+    init: function(e){
         
         var submitButton = document.getElementById("button"); // Reference to the send button
         var textArea = document.getElementById("area"); // Reference to the text field
@@ -59,40 +59,41 @@ var MessageBoard = {
         
         var board = document.getElementById("messages"); // Reference to message field
         var message = document.createElement("div"); // "The" message
-        var messageParagraph = document.createElement("p"); // Text
-        var timeParagraph = document.createElement("p"); // Time text
+        var messageP = document.createElement("p"); // Text
+        var timeP = document.createElement("p"); // Time text
         var a = document.createElement("a");  // Link for timeStamp
         var a2 = document.createElement("a");  // Link for removeMessage
-        var removeMessage = document.createElement("img"); // Delete message
-        var timeStamp = document.createElement("img"); // Show date and time
+        var removeIcon = document.createElement("img"); // Delete message
+        var timeIcon = document.createElement("img"); // Show date and time
         
         // Configuration
         message.className = "message";
         
-        messageParagraph.className = "messageP";
-        messageParagraph.innerHTML = MessageBoard.messages[messageID].getHTMLText();
-        timeParagraph.className = "timeP";
-        timeParagraph.innerHTML = MessageBoard.messages[messageID].getTime(); // Time in 00:00:00
+        messageP.className = "messageP";
+        messageP.innerHTML = MessageBoard.messages[messageID].getHTMLText();
+        timeP.className = "timeP";
+        timeP.innerHTML = (MessageBoard.messages[messageID].getDate().toLocaleTimeString()); // Time in 00:00:00
         
-        removeMessage.src = "pics/delete.png";
-        removeMessage.alt = "delete message";
-        timeStamp.src = "pics/clock.png";
-        timeStamp.alt = "show time written";
+        
+        removeIcon.src = "pics/delete.png";
+        removeIcon.alt = "delete message";
+        timeIcon.src = "pics/clock.png";
+        timeIcon.alt = "show time written";
         
         a.setAttribute("href", "#");
         a2.setAttribute("href", "#");
         
         // Appends elements where they should be
-        a.appendChild(timeStamp);
-        a2.appendChild(removeMessage);
+        a.appendChild(timeIcon);
+        a2.appendChild(removeIcon);
         message.appendChild(a2);
         message.appendChild(a);
-        message.appendChild(messageParagraph);
-        message.appendChild(timeParagraph);
+        message.appendChild(messageP);
+        message.appendChild(timeP);
         board.appendChild(message);
         
         // Deletes message on click (with confirm window)
-        removeMessage.addEventListener("click", function(){ // With addEventListener
+        removeIcon.addEventListener("click", function deleteMessage(){ // With addEventListener
             if (window.confirm("Vill du verkligen radera meddelandet?")){
                 MessageBoard.messages.splice(messageID, 1); // Removes message from array
                 MessageBoard.renderMessages(); // Updates messages
@@ -102,9 +103,9 @@ var MessageBoard = {
         });
         
         // Shows the written date/time, on click (with alert window)
-        timeStamp.addEventListener("click", function(){
+        timeIcon.addEventListener("click", function creationDate(){
             // Gets the object's creation date
-            window.alert("Inlägget skapades " + MessageBoard.messages[messageID].getDateText());
+            window.alert("Inlägget skapades den "+MessageBoard.messages[messageID].getDateText());
         });
     },
     
@@ -112,11 +113,11 @@ var MessageBoard = {
     renderAmountOfMessages: function(){
         
         var amount = document.getElementById("amountOfMessages");
-        var amountParagraph = document.createElement("p");
+        var amountP = document.createElement("p");
         
         amount.innerHTML = "";
-        amountParagraph.innerHTML = "Antal meddelanden : " + MessageBoard.messages.length;
-        amount.appendChild(amountParagraph);
+        amountP.innerHTML = "Antal meddelanden : " + MessageBoard.messages.length;
+        amount.appendChild(amountP);
     },
 };
 window.onload = MessageBoard.init;

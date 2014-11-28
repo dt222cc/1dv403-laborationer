@@ -19,10 +19,6 @@ function Message(message, date){
     this.setDate = function(_date){
         date = _date;
     };
-    
-    this.getTime = function(){
-        return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-    };
 }
     
     // String representation of the object
@@ -35,7 +31,9 @@ function Message(message, date){
         return this.getText().replace(/[\n\r]/g, "<br>");
     };
     
-    // Configures date text - TODO: remove timezone (if necessary)
+    // Configures date text (gets current month (0-11) and match it with the array)
     Message.prototype.getDateText = function(){
-        return " (" + this.getDate() + ")";
+    	var i = this.getDate().getMonth();
+    	var months = ["januari", "februari", "mars", "april", "maj", "juni", "juli", "augusti", "september", "oktober", "november", "december"];
+    	return +this.getDate().getDate()+" " +months[i]+" "+this.getDate().getFullYear()+" klockan "+this.getDate().toLocaleTimeString();
     };
