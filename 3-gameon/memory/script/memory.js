@@ -52,6 +52,7 @@ var Memory = {
         }
     },
     
+    // Click event for mouse click and keypress (enter)
     clickEvent: function(aTagg, count){
         
         // Mouse click
@@ -70,6 +71,7 @@ var Memory = {
         });
     },
     
+    // Turns selected tile/tiles
     turnPicture: function(tile, turnCount){
         
         console.log("flip");
@@ -83,9 +85,8 @@ var Memory = {
         
         Memory.turnedPictures.push(tile); // Store flipped tiles in an array (for function checkMatch)
         
-        // Flip tile and show tile img
+        // Flip tile and show/get tile img
         if (Memory.turnedPictures.length <= 2){
-            
             console.log(Memory.gameArray[turnCount]);
             
             img.getAttribute("src");
@@ -94,17 +95,28 @@ var Memory = {
         
         // Two tiles are flipped > time to check for match
         if (Memory.turnedPictures.length === 2){
-            
-            // TODO - Timeout
-            Memory.checkMatch(Memory.turnedPictures);
+            setTimeout(function(){
+                Memory.checkMatch(Memory.turnedPictures);
+            }, 900);
         }
     },
     
-    checkMatch: function(){
-        
+    // Checks if selected two tiles match
+    checkMatch: function(tiles){
+
         console.log("checking");
         
-        
+        // If tiles match, they stay turned
+        if (tiles[0].getElementsByTagName("img")[0].getAttribute("src") === tiles[1].getElementsByTagName("img")[0].getAttribute("src")){
+            Memory.turnedPictures = []; // Array gets emptied for next set of guess
+        }
+        // If not a match, flip them back to the default "backside" image
+        else {
+            tiles[0].getElementsByTagName("img")[0].setAttribute("src", "pics/0.png");
+            tiles[1].getElementsByTagName("img")[0].setAttribute("src", "pics/0.png");
+            
+            Memory.turnedPictures = []; // Array gets emptied for next set of guess
+        }
     },
 };
 
