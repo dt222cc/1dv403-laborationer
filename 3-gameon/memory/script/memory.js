@@ -17,9 +17,9 @@ var Memory = {
         
         Memory.buildBoard();
     },
-    
+
     // Builds a board for the game
-    buildBoard: function(){
+    buildBoard: function(game){
         
         var turnCount = 0;
         var board = document.getElementById("board");
