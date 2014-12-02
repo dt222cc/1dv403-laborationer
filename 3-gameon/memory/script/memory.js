@@ -7,6 +7,8 @@ var Memory = {
     
     gameArray: [],
     turnedPictures: [],
+    guesses: 0,
+    matches: 0,
     
     init: function(){
         
@@ -57,14 +59,12 @@ var Memory = {
         
         // Mouse click
         aTagg.addEventListener("click", function(e){
-            console.log("click");
             Memory.turnPicture(aTagg, count);
         });
         
         // Keypress, enter
         aTagg.addEventListener("keydown", function(key){
             if (key.keyCode === 13){
-                console.log("press");
                 key.preventDefault();
                 Memory.turnPicture(aTagg, count);
             }
@@ -73,8 +73,6 @@ var Memory = {
     
     // Turns selected tile/tiles
     turnPicture: function(tile, turnCount){
-        
-        console.log("flip");
         
         var img = tile.getElementsByTagName("img")[0];
         
@@ -104,11 +102,31 @@ var Memory = {
     // Checks if selected two tiles match
     checkMatch: function(tiles){
 
-        console.log("checking");
+        Memory.guesses++;
         
         // If tiles match, they stay turned
         if (tiles[0].getElementsByTagName("img")[0].getAttribute("src") === tiles[1].getElementsByTagName("img")[0].getAttribute("src")){
             Memory.turnedPictures = []; // Array gets emptied for next set of guess
+            Memory.matches++;
+            
+            if (Memory.matches === 8){
+                var result = document.getElementById("result");
+                
+                var text = document.createElement("p");
+                text.innerHTML = ("Grattis! Du klarade spelet på " +Memory.guesses+ " försök. Vill du köra igen? ");
+                
+                var reset = document.createElement("input");
+                reset.type = "submit", reset.value ="ja";
+                
+                text.appendChild(reset);
+                result.appendChild(text);
+                
+                Memory.playAgain(reset);
+                
+                // if (window.confirm("Grattis! Du klarade spelet på " +Memory.guesses+ " försök. Vill du köra igen?")){
+                //     location.reload();
+                // }
+            }
         }
         // If not a match, flip them back to the default "backside" image
         else {
@@ -117,6 +135,22 @@ var Memory = {
             
             Memory.turnedPictures = []; // Array gets emptied for next set of guess
         }
+    },
+    
+    playAgain: function(yes){
+        
+        // Mouse click
+        yes.addEventListener("click", function(e){
+            location.reload();
+        });
+        
+        // Keypress, enter
+        yes.addEventListener("keydown", function(key){
+            if (key.keyCode === 13){
+                key.preventDefault();
+                location.reload();
+            }
+        });
     },
 };
 

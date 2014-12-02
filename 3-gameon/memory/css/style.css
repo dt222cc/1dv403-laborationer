@@ -23,3 +23,17 @@ img {
 a {
     padding-top: 15px;
 }
+
+input {
+	height: 30px;
+	font-size: 1.1em;
+}
+
+input:focus, input:hover {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    transform: scale(1.2);
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.1);
+}
