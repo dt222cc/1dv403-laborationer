@@ -14,7 +14,7 @@ body {
 }
 
 h1 {
-    margin-left: 120px;
+    margin-left: 40px;
 }
 
 img {
@@ -26,9 +26,7 @@ a {
 }
 
 input {
-	margin-top: 220px;
-	margin-left: -225px;
-	height: 30px;
+	margin-left: 50px;
 }
 
 input:focus, input:hover {
@@ -38,8 +36,4 @@ input:focus, input:hover {
     -moz-transform: scale(1.2);
     transform: scale(1.2);
     box-shadow: 10px 10px 10px rgba(0,0,0,0.1);
-}
-
-.game > p {
-	margin-left: 15px;
 }
