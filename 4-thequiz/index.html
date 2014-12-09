@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+    	<meta charset="UTF-8" />
+     	<title>JavaScript - Laboration 3 - The Quiz!</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    
+    <body>
+        <header>
+            <h1>Th<span>e</span> Qui<span>z</span></h1>
+        </header>
+        
+        <main>
+            <form>
+                <input type="button" id="getQuestion" value="Hämta fråga"/>
+                
+                <div id="question">
+                    <p class="question">1. Professional JavaScript for Web Developers</p>
+                </div>
+                
+                <textarea rows="6" id="textArea" placeholder="Skriv ditt svar här..."></textarea>
+                <input type="button" id="sendAnswer" value="Skicka svar"/>
+            </form>
+        </main>
+        
+        <script type="text/javascript" src="script/theQuiz.js"></script>
+    </body>
+</html>
