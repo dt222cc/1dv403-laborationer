@@ -12,13 +12,16 @@
         </header>
         
         <main>
-            <input type="button" id="start" value="Hämta första frågan"/>
-            
-            <form id="quizBoard">
-                <!--<div id="questions">-->
-                <!--    <p class="question">1. Professional JavaScript for Web Developers</p>-->
-                <!--</div>-->
-            </form>
+            <div id="QUIZ">
+                <input type="button" id="start" value="Hämta första frågan"/>
+                
+                <form id="quizBoard" class="visible">
+                    <p id="questionP">test</p>
+                    
+                    <textarea rows="3" id="value" placeholder="Skriv ditt svar här..."></textarea>
+                    <input type="button" id="send" value="Skicka svar"/>
+                </form>
+            </div>
         </main>
         
         <script type="text/javascript" src="script/quiz.js"></script>
