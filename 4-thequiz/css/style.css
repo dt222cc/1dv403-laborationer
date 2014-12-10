@@ -51,7 +51,11 @@ input {
     font-size: 22px;
 }
 
-#sendAnswer {
+.sendAnswer {
     float: right;
+}
+
+.visible {
+    visibility: hidden;
 }
 /*----------------------------------------------------------*/

@@ -2,64 +2,107 @@
 
 var Quiz = {
     
-    questionURL: "http://vhost3.lnu.se:20080/question/1",
+    questionURL : "http://vhost3.lnu.se:20080/question/1",
+    quizBoard   : document.getElementById("quizBoard"),
     
-    // Event listener on a button for the first question.
-    init: function(){
+    init: function() {
         
-        var start = document.getElementById("start");
+        var startButton = document.getElementById("start");
         
-        start.addEventListener("click", function(){
-            console.log("start.click");
-            
+        // Event listener on a button for the first question.
+        startButton.addEventListener("click", function() {
             Quiz.getQuestion();
+            startButton.classList.toggle("visible");
         });
         
-        start.addEventListener("keydown", function(key){
-            if (key.keyCode === 13){
-                console.log("start.enter");
-                
-                key.preventDefault();
+        startButton.addEventListener("keydown", function(e) {
+            if (e.eCode === 13) {
+                e.preventDefault();
                 Quiz.getQuestion();
+                startButton.classList.toggle("visible");
             }
-        });        
+        });
     },
     
     // Retrieves and stores question from server
-    getQuestion: function(){
+    getQuestion: function() {
         
-        console.log("getQuestion start");
-        
-        var questionArray;
-        var question;
         var xhr = new XMLHttpRequest();
-        
-        xhr.onreadystatechange = function(){
-            if (xhr.readyState === 4 && xhr.status === 200){
-                console.log("if ready");
-                
-                question = JSON.parse(xhr.responseText);
-                questionArray.push(question);
-                question.innerHTML = "Fråga " + question.id + " : " + question.question;
-                
-                console.log(question);
-                console.log(question.innerHTML);
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    var question = JSON.parse(xhr.responseText);
+                    
+                    question.innerHTML = "Fråga " + question.id + " : " + question.question;
+                    
+                    // Continue here
+                    Quiz.renderBoard(question);
+                }
+                else {
+                    console.log("Läsfel, status: " + xhr.status);
+                }
             }
-            else {
-                console.log("Läsfel, status: " + xhr.status);
-            }
-        };
+        },
         
         xhr.open("GET", Quiz.questionURL, true);
         xhr.send(null);
-        
-        console.log(xhr);
-        console.log(question);
-        console.log(question.innerHTML);
     },
     
-    sendAnswer: function(answerURL){
+    
+    // Create a text area and a submit button with event listener
+    renderBoard: function(question) {
+
+        // First: render question
+        var questions = document.createElement("div");
+        var questionParagraph = document.createElement("p");
         
+        questions.id = "questions";
+        questionParagraph.className = "question";
+        questionParagraph.innerHTML = question.innerHTML;
+        
+        questions.appendChild(questionParagraph);
+        Quiz.quizBoard.appendChild(questions);
+        
+        // Second: the textArea
+        var textArea = document.createElement("textarea");
+        
+        textArea.setAttribute("rows", "3");
+        textArea.setAttribute("placeholder", "Skriv ditt svar här...");
+        
+        textArea.addEventListener("keydown", function(e) {
+            if (e.keyCode === 13 && e.shiftKey === false) {
+                e.preventDefault();
+                Quiz.sendAnswer(question);
+            }
+        });
+        
+        Quiz.quizBoard.appendChild(textArea);
+        
+        // Third: the submitButton
+        var submitButton = document.createElement("input");
+        
+        submitButton.setAttribute("type", "button");
+        submitButton.setAttribute("value", "Skicka svar");
+        submitButton.className = "sendAnswer";
+        
+        submitButton.addEventListener("click", function() {
+                Quiz.sendAnswer(question);
+        });
+        
+        submitButton.addEventListener("keydown", function(e) {
+            if (e.eCode === 13) {
+                e.preventDefault();
+                Quiz.sendAnswer(question);
+            }
+        });
+        
+        Quiz.quizBoard.appendChild(submitButton);
+    },
+    
+    sendAnswer: function(question){
+        console.log("BAAAM!!");
+        console.log(question.nextURL);
     },
     
 };
