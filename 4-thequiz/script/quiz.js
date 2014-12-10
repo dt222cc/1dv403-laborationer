@@ -2,7 +2,7 @@
 
 var Quiz = {
     
-    questionURL         : "http://vhost3.lnu.se:20080/question/1",
+    questionURL: "http://vhost3.lnu.se:20080/question/1",
     
     startButton         : document.getElementById("start"),
     quizBoard           : document.getElementById("quizBoard"),
@@ -10,11 +10,10 @@ var Quiz = {
     submitButton        : document.getElementById("send"),
     questionParagraph   : document.getElementById("questionP"),
     
-    questionObject      : {},
-    answerObject        : {},
+    questionObject: {}, answerObject: {},
+    questionsArray: [], triesPerQuestion: [],
     
-    questionID          : 1,
-    
+    questionID: 1, tries: 0, totalTries: 0, result: "",
     
     // The quiz starts with a single button, here I add eventlistener to that button.
     init: function() {
@@ -33,16 +32,13 @@ var Quiz = {
     
     /*
      * Here I toggle the start button to be hidden while the hidden quizboard now become visible.
-     * From here I get the question from URL with function getQuestion() and then I add eventlistener on textarea and submitbutton for the next part
-     * which is sending an answer and checking if its correct or not.
+     * From here I add eventlistener on textarea and submitbutton for the sending answer part.
+     * Then the question from URL gets stored with function getQuestion() 
      */
     start: function() {
         Quiz.startButton.classList.toggle("visible");
         Quiz.quizBoard.classList.toggle("visible");
-        
-        Quiz.getQuestion(); // Get question
-        
-        // Sending answer with enter or submitbutton
+
         Quiz.textArea.addEventListener("keydown", function(e) {
             if (e.keyCode === 13 && e.shiftKey === false) {
                 e.preventDefault();
@@ -60,9 +56,16 @@ var Quiz = {
                 Quiz.sendAnswer();
             }
         });
+        
+        Quiz.getQuestion();
+        
     },
     
-    // Retrieves and stores question from server
+    /* 
+     * Retrieves and stores next question from URL.
+     * Renders the paragraph for question.
+     * Stores question in an array for all questions for later use.
+     */
     getQuestion: function() {
         
         var xhr = new XMLHttpRequest();
@@ -72,9 +75,8 @@ var Quiz = {
                 if (xhr.status === 200) {
                     Quiz.questionObject = JSON.parse(xhr.responseText);
                     
-                    Quiz.questionParagraph.innerHTML = "Fråga " + Quiz.questionID + " : " + Quiz.questionObject.question; // Format for the paragraph
-                    
-                    console.log(Quiz.questionParagraph.innerHTML); // Temp
+                    Quiz.questionParagraph.innerHTML = "Fråga " + Quiz.questionID + " : " + Quiz.questionObject.question;
+                    Quiz.questionsArray.push(Quiz.questionObject.question);
                 }
                 else {
                     console.log("Läsfel, status: " + xhr.status);
@@ -86,9 +88,15 @@ var Quiz = {
         xhr.send(null);
     },
     
+    /* 
+     * Handles counters. Checks the nextURL. End the quiz if there's no more questions.
+     * Retrieves and stores the answer from URL.
+     * Checks the users guess from textarea with the answer from answerURL.
+     * Stores tries made for the question in an array for later use.
+     */
     sendAnswer: function(){
         
-        console.log("sending answer: " + Quiz.textArea.value); // Temp
+        Quiz.tries++;
         
         var xhr = new XMLHttpRequest();
 
@@ -97,15 +105,20 @@ var Quiz = {
                 if (xhr.status === 200) {
                     
                     Quiz.answerObject = JSON.parse(xhr.responseText);
-                    
-                    // If correct answer, get the next answerURL
+
                     if (Quiz.answerObject.message === "Correct answer!") {
-                        Quiz.questionURL = Quiz.answerObject.nextURL; // Stores the nextURL
-                        Quiz.questionID++; // QuestionID increases by '1' for the next question
+                        Quiz.questionURL = Quiz.answerObject.nextURL;
+                        Quiz.questionID++;
+                        
+                        Quiz.triesPerQuestion.push(Quiz.tries);
+                        Quiz.tries = 0;
+                        
                         Quiz.getQuestion();
                     }
-                    else {
-                        // Wrong answer, here?
+                    
+                    if (!Quiz.answerObject.hasOwnProperty("nextURL")) {
+                        Quiz.ending();
+                        return false;
                     }
                 }
                 else {
@@ -115,6 +128,7 @@ var Quiz = {
         };
         
         var value = JSON.stringify({"answer": Quiz.textArea.value});
+        
         xhr.open("POST", Quiz.questionObject.nextURL, true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(value);
@@ -122,13 +136,27 @@ var Quiz = {
         Quiz.textArea.value = "";
     },
     
+    ending: function() {
+
+        console.log("All tries in an array: " + Quiz.triesPerQuestion);
+        console.log("All questions in an array: " + Quiz.questionsArray);
+        
+        Quiz.questionParagraph.innerHTML = "Du har svarat på alla frågor! Antal fel svar för varje fråga är: <br />"; 
+
+        for (var i = 0; i < Quiz.questionID-1; i++) {
+            Quiz.result += Quiz.questionsArray[i] + " = " + Quiz.triesPerQuestion[i] + " fel svar. <br />";
+            Quiz.totalTries += Quiz.triesPerQuestion[i];
+        }
+        Quiz.questionParagraph.innerHTML += "<br />" + Quiz.result + "<br />Du gjorde totalt " + Quiz.totalTries + " fel gissningar.";
+    }
 };
 
 window.onload = Quiz.init();
 
 
 
-// TODO -   * when there's no more questions.
+// TODO -   * Done - when there's no more questions. ** Bugfixes
 //          * when u type in the wrong answer = red background with text somewhere? (add paragraph? toggle paragraph? and then remove it when answer is correct?)
-//          * a counter for numbers of tries for each question (variable for the counter and one for an array containing the counters?)
-//          * question 5: Vad ä 14-2   =    Typo? or intended,  fix with "regex/reguljära uttryck?" (need to research)
+
+// Testing  * For wrong answer: Going to try with adding and removing a new <p> element.
+// Quiz.quizBoard.insertBefore(newElement, Quiz.questionParagraph);
