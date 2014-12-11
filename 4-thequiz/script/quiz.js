@@ -14,7 +14,7 @@ var Quiz = {
     questionObject: {}, answerObject: {},
     questionsArray: [], triesPerQuestion: [],
     
-    questionID: 1, tries: 0, totalTries: 0, result: "",
+    questionID: 0, tries: 0, totalTries: 0, result: "",
     
     // The quiz starts with a single button, here I add eventlistener to that button.
     init: function() {
@@ -76,6 +76,7 @@ var Quiz = {
                 if (xhr.status === 200) {
                     Quiz.questionObject = JSON.parse(xhr.responseText);
                     
+                    Quiz.questionID++;
                     Quiz.questionParagraph.innerHTML = "Fråga " + Quiz.questionID + ": " + Quiz.questionObject.question;
                     Quiz.questionsArray.push(Quiz.questionParagraph.innerHTML);
                 }
@@ -97,7 +98,7 @@ var Quiz = {
      */
     sendAnswer: function(){
         
-        Quiz.tries++;
+        // Quiz.tries++;
         
         var xhr = new XMLHttpRequest();
 
@@ -108,7 +109,6 @@ var Quiz = {
                     
                     if (Quiz.answerObject.message === "Correct answer!") {
                         Quiz.questionURL = Quiz.answerObject.nextURL;
-                        Quiz.questionID++;
                         
                         Quiz.triesPerQuestion.push(Quiz.tries);
                         Quiz.tries = 0;
@@ -124,6 +124,7 @@ var Quiz = {
                 
                 else if (xhr.status == 400) {
                     Quiz.wrongAnswer.classList.remove("visible");
+                    Quiz.tries++;
                 }
                 
                 else {
@@ -145,7 +146,7 @@ var Quiz = {
         
         Quiz.questionParagraph.innerHTML = "Du har svarat på alla frågor! Antal fel svar för varje fråga är: <br />"; 
 
-        for (var i = 0; i < Quiz.questionID-1; i++) {
+        for (var i = 0; i < Quiz.questionID; i++) {
             Quiz.result += Quiz.questionsArray[i] + " = " + Quiz.triesPerQuestion[i] + " fel svar. <br />";
             Quiz.totalTries += Quiz.triesPerQuestion[i];
         }
