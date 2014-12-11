@@ -9,6 +9,7 @@ var Quiz = {
     textArea            : document.getElementById("value"),
     submitButton        : document.getElementById("send"),
     questionParagraph   : document.getElementById("questionP"),
+    wrongAnswer         : document.getElementById("wrongAnswer"),
     
     questionObject: {}, answerObject: {},
     questionsArray: [], triesPerQuestion: [],
@@ -31,12 +32,13 @@ var Quiz = {
     },
     
     /*
-     * Here I toggle the start button to be hidden while the hidden quizboard now become visible.
+     * Here I remove the start button while the hidden quizboard now become visible.
      * From here I add eventlistener on textarea and submitbutton for the sending answer part.
      * Then the question from URL gets stored with function getQuestion() 
      */
     start: function() {
-        Quiz.startButton.classList.toggle("visible");
+        
+        document.getElementById("QUIZ").removeChild(document.getElementById("center"));
         Quiz.quizBoard.classList.toggle("visible");
 
         Quiz.textArea.addEventListener("keydown", function(e) {
@@ -58,7 +60,6 @@ var Quiz = {
         });
         
         Quiz.getQuestion();
-        
     },
     
     /* 
@@ -75,9 +76,10 @@ var Quiz = {
                 if (xhr.status === 200) {
                     Quiz.questionObject = JSON.parse(xhr.responseText);
                     
-                    Quiz.questionParagraph.innerHTML = "Fråga " + Quiz.questionID + " : " + Quiz.questionObject.question;
-                    Quiz.questionsArray.push(Quiz.questionObject.question);
+                    Quiz.questionParagraph.innerHTML = "Fråga " + Quiz.questionID + ": " + Quiz.questionObject.question;
+                    Quiz.questionsArray.push(Quiz.questionParagraph.innerHTML);
                 }
+                
                 else {
                     console.log("Läsfel, status: " + xhr.status);
                 }
@@ -91,8 +93,7 @@ var Quiz = {
     /* 
      * Handles counters. Checks the nextURL. End the quiz if there's no more questions.
      * Retrieves and stores the answer from URL.
-     * Checks the users guess from textarea with the answer from answerURL.
-     * Stores tries made for the question in an array for later use.
+     * Checks the value from textarea with the answer from answerURL.
      */
     sendAnswer: function(){
         
@@ -103,9 +104,8 @@ var Quiz = {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                    
                     Quiz.answerObject = JSON.parse(xhr.responseText);
-
+                    
                     if (Quiz.answerObject.message === "Correct answer!") {
                         Quiz.questionURL = Quiz.answerObject.nextURL;
                         Quiz.questionID++;
@@ -113,33 +113,35 @@ var Quiz = {
                         Quiz.triesPerQuestion.push(Quiz.tries);
                         Quiz.tries = 0;
                         
+                        Quiz.wrongAnswer.className = "visible"; // Hide wrongAnswer paragraph on correct answer.
                         Quiz.getQuestion();
                     }
                     
                     if (!Quiz.answerObject.hasOwnProperty("nextURL")) {
                         Quiz.ending();
-                        return false;
                     }
                 }
+                
+                else if (xhr.status == 400) {
+                    Quiz.wrongAnswer.classList.remove("visible");
+                }
+                
                 else {
                     console.log("Läsfel, status: " + xhr.status);
                 }
             }
         };
         
-        var value = JSON.stringify({"answer": Quiz.textArea.value});
+        var sendValue = JSON.stringify({"answer": Quiz.textArea.value});
         
         xhr.open("POST", Quiz.questionObject.nextURL, true);
         xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(value);
-        
+        xhr.send(sendValue);            // TODO - Bugfix? POST http://vhost3.lnu.se:20080/answer/1 400 (Bad Request)
+    
         Quiz.textArea.value = "";
     },
     
     ending: function() {
-
-        console.log("All tries in an array: " + Quiz.triesPerQuestion);
-        console.log("All questions in an array: " + Quiz.questionsArray);
         
         Quiz.questionParagraph.innerHTML = "Du har svarat på alla frågor! Antal fel svar för varje fråga är: <br />"; 
 
@@ -147,16 +149,12 @@ var Quiz = {
             Quiz.result += Quiz.questionsArray[i] + " = " + Quiz.triesPerQuestion[i] + " fel svar. <br />";
             Quiz.totalTries += Quiz.triesPerQuestion[i];
         }
+        
         Quiz.questionParagraph.innerHTML += "<br />" + Quiz.result + "<br />Du gjorde totalt " + Quiz.totalTries + " fel gissningar.";
+        
+        Quiz.quizBoard.removeChild(Quiz.textArea);
+        Quiz.quizBoard.removeChild(Quiz.submitButton);
     }
 };
 
 window.onload = Quiz.init();
-
-
-
-// TODO -   * Done - when there's no more questions. ** Bugfixes
-//          * when u type in the wrong answer = red background with text somewhere? (add paragraph? toggle paragraph? and then remove it when answer is correct?)
-
-// Testing  * For wrong answer: Going to try with adding and removing a new <p> element.
-// Quiz.quizBoard.insertBefore(newElement, Quiz.questionParagraph);

@@ -18,7 +18,21 @@ header span {
 }
 
 /*----------------------------------------------------------*/
-form {
+#center {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+#wrongAnswer {
+    background: #FF0000;
+    font-size: 22px;
+    padding: 5px;
+    margin: 0;
+}
+
+/*----------------------------------------------------------*/
+#quizBoard {
     background: white;
     width: auto;
     padding: 10px;
@@ -31,7 +45,7 @@ form {
     border: 1px solid #4DFF4D;
     font-size: 22px;
     padding: 5px;
-    margin-top: 10px;
+    margin-top: 0;
     margin-bottom: 7px;
     word-wrap: break-word;
 }
@@ -49,6 +63,15 @@ textarea:focus {
 
 input {
     font-size: 22px;
+}
+
+input:focus, input:hover {
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    transform: scale(1.1);
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.1);
 }
 
 #send {

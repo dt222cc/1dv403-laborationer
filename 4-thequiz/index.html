@@ -2,7 +2,7 @@
 <html lang="sv">
     <head>
     	<meta charset="UTF-8" />
-     	<title>JavaScript - Laboration 3 - The Quiz!</title>
+     	<title>JavaScript - Laboration 4 - The Quiz!</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     
@@ -13,10 +13,14 @@
         
         <main>
             <div id="QUIZ">
-                <input type="button" id="start" value="Hämta första frågan"/>
+                <div id="center">
+                    <input type="button" id="start" value="Hämta första frågan"/>
+                </div>
+                
+                <p id="wrongAnswer" class="visible">Fel svar! Försök igen.</p>
                 
                 <form id="quizBoard" class="visible">
-                    <p id="questionP">test</p>
+                    <p id="questionP">JavaScript behöver vara aktiverad för denna applikationen.</p>
                     
                     <textarea rows="3" id="value" placeholder="Skriv ditt svar här..."></textarea>
                     <input type="button" id="send" value="Skicka svar"/>
