@@ -115,7 +115,7 @@ var Quiz = {
                         Quiz.getQuestion();
                     }
                     
-                    if (!Quiz.answerObject.hasOwnProperty("nextURL") && Quiz.answerObject.message === "Correct answer!") {
+                    if (!Quiz.answerObject.hasOwnProperty("nextURL")) {
                         Quiz.ending();
                     }
                 }
