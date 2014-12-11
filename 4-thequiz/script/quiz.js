@@ -98,8 +98,6 @@ var Quiz = {
      */
     sendAnswer: function(){
         
-        // Quiz.tries++;
-        
         var xhr = new XMLHttpRequest();
 
         xhr.onreadystatechange = function() {
@@ -117,7 +115,7 @@ var Quiz = {
                         Quiz.getQuestion();
                     }
                     
-                    if (!Quiz.answerObject.hasOwnProperty("nextURL")) {
+                    if (!Quiz.answerObject.hasOwnProperty("nextURL") && Quiz.answerObject.message === "Correct answer!") {
                         Quiz.ending();
                     }
                 }
@@ -137,7 +135,7 @@ var Quiz = {
         
         xhr.open("POST", Quiz.questionObject.nextURL, true);
         xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(sendValue);            // TODO - Bugfix? POST http://vhost3.lnu.se:20080/answer/1 400 (Bad Request)
+        xhr.send(sendValue);            // TODO - Bug or intended? POST http://vhost3.lnu.se:20080/answer/1 400 (Bad Request)
     
         Quiz.textArea.value = "";
     },
