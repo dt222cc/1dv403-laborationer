@@ -19,9 +19,7 @@ var Quiz = {
     // The quiz starts with a single button, here I add eventlistener to that button.
     init: function() {
         
-        Quiz.startButton.addEventListener("click", function() {
-            Quiz.start();
-        });
+        Quiz.startButton.addEventListener("click", Quiz.start);
         
         Quiz.startButton.addEventListener("keydown", function(e) {
             if (e.eCode === 13) {
@@ -48,9 +46,7 @@ var Quiz = {
             }
         });
         
-        Quiz.submitButton.addEventListener("click", function() {
-            Quiz.sendAnswer();
-        });
+        Quiz.submitButton.addEventListener("click", Quiz.sendAnswer);
         
         Quiz.submitButton.addEventListener("keydown", function(e) {
             if (e.keyCode === 13) {
