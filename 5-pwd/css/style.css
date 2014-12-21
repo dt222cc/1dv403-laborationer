@@ -1,0 +1,71 @@
+/**************************/
+body {
+	background: gray;
+}
+
+a {
+	display: block;
+}
+
+/**************************/
+#container {
+    background: url(../pics/bg.jpg);
+    width: 1024px;
+	height: 640px;
+    margin: 0 auto;
+	border: 6px solid #9b3b00;
+}
+
+/**************************/
+#content {
+	float: left;
+	height: 94%;
+    width: 100%;
+}
+
+/**************************/
+#bottom {
+    float: left;
+    background: #9b3b00;
+    height: 32px;
+    padding: 5px;
+    margin-left: -5px;
+    width: 100%;
+}
+
+.aIcon {
+    float: left;
+}
+
+.aIcon img {
+	float: left;
+	margin: 0 5px 0 5px;
+}
+
+/**************************/
+.windowDiv {
+    width: 330px;
+}
+
+.appHeader {
+    background: gray;
+    height: 40px;
+    width: 100%;
+}
+
+.appHeader img {
+    float: left;
+    width: 20px;
+    padding: 0 4px 0 4px;
+}
+
+.appHeader p {
+    float: left;
+    margin: 0;
+}
+
+.appHeader a {
+    float: right;
+}
+
+/**************************/
