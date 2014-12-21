@@ -2,7 +2,7 @@
 
 var Desktop = {
     
-    bottom: document.querySelector("#bottom"),
+    deskFooter: document.querySelector("#deskFooter"),
     
     init: function() {
         Desktop.createImageViewer();
@@ -25,6 +25,8 @@ var Desktop = {
         };
         
         aViewer.appendChild(imgViewer);
-        this.bottom.appendChild(aViewer);
+        Desktop.deskFooter.appendChild(aViewer);
     }
 };
+
+window.onload = new Desktop.init();

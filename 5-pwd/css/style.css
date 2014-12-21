@@ -1,10 +1,15 @@
 /**************************/
 body {
 	background: gray;
+	font-family: verdana;
 }
 
 a {
 	display: block;
+}
+
+a:focus, a:hover {
+    transform: scale(1.2);
 }
 
 /**************************/
@@ -16,7 +21,6 @@ a {
 	border: 6px solid #9b3b00;
 }
 
-/**************************/
 #content {
 	float: left;
 	height: 94%;
@@ -24,7 +28,7 @@ a {
 }
 
 /**************************/
-#bottom {
+#deskFooter {
     float: left;
     background: #9b3b00;
     height: 32px;
@@ -42,9 +46,13 @@ a {
 	margin: 0 5px 0 5px;
 }
 
-/**************************/
-.windowDiv {
-    width: 330px;
+/******App window*******/
+.appWindow {
+	float: left;
+    width: 300px;
+    text-align: left;
+    border: 1px solid black;
+    /*TODO - Resizeable*/
 }
 
 .appHeader {
@@ -66,6 +74,36 @@ a {
 
 .appHeader a {
     float: right;
+    margin: 4px;
 }
 
+.appContainer {
+    float: left;
+    background: #E8E8E8;
+}
+
+.appFooter {
+    float: left;
+    background: gray;
+    height: 25px;
+    width: 100%;
+}
+
+.appFooter img {
+    float: left;
+    margin: 4px;
+}
+
+.appFooter p {
+    float: left;
+    margin: 0;
+}
+
+/*******Image Viewer*******/
+.imgContainer {
+    float: left;
+	padding: 5px;
+	background: #707070;
+	margin: 5px 5px 5px 8px;
+}
 /**************************/

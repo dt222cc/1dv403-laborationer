@@ -2,12 +2,63 @@
 
 var ImageViewer = {
     
+    imgURL: "http://homepage.lnu.se/staff/tstjo/labbyServer/imgviewer/",
+    imgArr: [],
+    thumbHeight: 0,
+    thumbWidth: 0,
+    
     init: function() {
         new Window.createWindow("ImageViewer");
         ImageViewer.getImages();
     },
 
     getImages: function() {
-        console.log("getimages");
+        
+        var xhr = new XMLHttpRequest();
+      
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status == 200) {
+                    ImageViewer.imageArr = JSON.parse(xhr.responseText);
+                    
+                    for (var i = 0; i < ImageViewer.imageArr.length; i++) {
+                        if (ImageViewer.imageArr[i].thumbWidth > ImageViewer.thumbWidth) {
+                            ImageViewer.thumbWidth = ImageViewer.imageArr[i].thumbWidth;
+                        }
+                        
+                        if (ImageViewer.imageArr[i].thumbHeight > ImageViewer.thumbHeight) {
+                            ImageViewer.thumbHeight = ImageViewer.imageArr[i].thumbHeight;
+                        }
+                    }
+                    
+                    ImageViewer.renderImages();
+                }
+                
+                else {
+                    console.log("Läsfel, status:" + xhr.status);
+                }
+            }
+        };
+        
+        xhr.open("GET", ImageViewer.imgURL, true);
+        xhr.send(null);
+    },
+    
+    renderImages: function() {
+        
+      ImageViewer.imageArr.forEach(function(currentImage) {
+         var imgContainer = document.createElement("a");
+         imgContainer.classList.add("imgContainer");
+         imgContainer.href = "#";
+         imgContainer.style.width = ImageViewer.thumbWidth + "px";
+         imgContainer.style.height = ImageViewer.thumbHeight + "px";
+
+         var image = document.createElement("img");
+         image.src = currentImage.thumbURL;
+         imgContainer.appendChild(image);
+         
+         var appContainer = document.querySelector(".ImageViewer");
+         appContainer.appendChild(imgContainer);
+      });
     },
 };
