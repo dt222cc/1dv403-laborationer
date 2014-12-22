@@ -8,6 +8,7 @@ var Window = {
         
         var appWindow = document.createElement("div");
         appWindow.className = "appWindow";
+        appWindow.classList.add(name);
         content.appendChild(appWindow); 
         
         // Header
@@ -42,7 +43,7 @@ var Window = {
         // Container
         var windowContainer = document.createElement("div");
         windowContainer.className = "appContainer";
-        windowContainer.classList.add(name);
+        windowContainer.classList.add(name.toLowerCase());
         appWindow.appendChild(windowContainer);
         
         // Footer

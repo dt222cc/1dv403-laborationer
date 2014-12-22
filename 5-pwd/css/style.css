@@ -48,7 +48,7 @@ a:focus, a:hover {
 
 /******App window*******/
 .appWindow {
-	float: left;
+    float: left;
     width: 300px;
     text-align: left;
     border: 1px solid black;
@@ -102,8 +102,9 @@ a:focus, a:hover {
 /*******Image Viewer*******/
 .imgContainer {
     float: left;
-	padding: 5px;
-	background: #707070;
-	margin: 5px 5px 5px 8px;
+    padding: 5px;
+    background: #707070;
+    margin: 5px 5px 5px 8px;
 }
+
 /**************************/

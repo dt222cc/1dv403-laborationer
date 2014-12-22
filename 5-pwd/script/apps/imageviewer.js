@@ -57,7 +57,7 @@ var ImageViewer = {
          image.src = currentImage.thumbURL;
          imgContainer.appendChild(image);
          
-         var appContainer = document.querySelector(".ImageViewer");
+         var appContainer = document.querySelector(".imageviewer");
          appContainer.appendChild(imgContainer);
       });
     },

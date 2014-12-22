@@ -2,8 +2,6 @@
 
 var Desktop = {
     
-    deskFooter: document.querySelector("#deskFooter"),
-    
     init: function() {
         Desktop.createImageViewer();
     },
@@ -20,13 +18,23 @@ var Desktop = {
         aViewer.alt = "Open Image Viewer.";
         aViewer.className = "aIcon";
         
-        aViewer.onclick = function(){
-            new ImageViewer.init();
+        aViewer.onclick = function() {
+            if (document.querySelector(".appWindow") === null) {
+                new ImageViewer.init();
+            }
+            
+            else {
+                document.querySelector(".appWindow").remove();
+            }
         };
         
         aViewer.appendChild(imgViewer);
-        Desktop.deskFooter.appendChild(aViewer);
-    }
+        document.querySelector("#deskFooter").appendChild(aViewer);
+    },
+    
+    clickEvent: function() {
+        
+    },
 };
 
 window.onload = new Desktop.init();
