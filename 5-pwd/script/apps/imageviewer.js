@@ -32,6 +32,8 @@ var ImageViewer = {
                     }
                     
                     ImageViewer.renderImages();
+                    
+                    document.querySelector(".loading").remove();
                 }
                 
                 else {
@@ -47,16 +49,21 @@ var ImageViewer = {
     renderImages: function() {
         
       ImageViewer.imageArr.forEach(function(currentImage) {
+         var image = document.createElement("img");
+         image.src = currentImage.thumbURL;
+         
          var imgContainer = document.createElement("a");
          imgContainer.classList.add("imgContainer");
          imgContainer.href = "#";
          imgContainer.style.width = ImageViewer.thumbWidth + "px";
          imgContainer.style.height = ImageViewer.thumbHeight + "px";
-
-         var image = document.createElement("img");
-         image.src = currentImage.thumbURL;
-         imgContainer.appendChild(image);
          
+         imgContainer.onclick = function() {
+             document.querySelector("#content").style.background = "url(" + currentImage.URL + ")";
+         };
+         
+         imgContainer.appendChild(image);
+
          var appContainer = document.querySelector(".imageviewer");
          appContainer.appendChild(imgContainer);
       });

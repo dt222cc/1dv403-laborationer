@@ -50,14 +50,18 @@ var Window = {
         var windowFooter = document.createElement("footer");
         windowFooter.className = "appFooter";
         
+        var loading = document.createElement("div");
+        loading.className = "loading";
+        
         var loaderGIF = document.createElement("img");
         loaderGIF.src = "pics/ajax-loader.gif";
         loaderGIF.className = "loader";
-        windowFooter.appendChild(loaderGIF);
+        loading.appendChild(loaderGIF);
         
         var footerText = document.createElement("p");
         footerText.innerHTML = "Loading";
-        windowFooter.appendChild(footerText),
+        loading.appendChild(footerText),
+        windowFooter.appendChild(loading),
 
         appWindow.appendChild(windowFooter);
     },
