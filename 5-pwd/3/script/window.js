@@ -62,7 +62,6 @@ var Window = {
         footerText.innerHTML = "Loading";
         loading.appendChild(footerText),
         windowFooter.appendChild(loading),
-
         appWindow.appendChild(windowFooter);
     },
 };

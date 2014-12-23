@@ -64,8 +64,7 @@ var ImageViewer = {
          
          imgContainer.appendChild(image);
 
-         var appContainer = document.querySelector(".imageviewer");
-         appContainer.appendChild(imgContainer);
+         document.querySelector(".imageviewer").appendChild(imgContainer);
       });
     },
 };
