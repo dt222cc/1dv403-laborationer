@@ -31,10 +31,6 @@ var Desktop = {
         aViewer.appendChild(imgViewer);
         document.querySelector("#deskFooter").appendChild(aViewer);
     },
-    
-    clickEvent: function() {
-        
-    },
 };
 
 window.onload = new Desktop.init();

@@ -33,7 +33,7 @@ var Window = {
         aClose.title = "Close app";
         aClose.appendChild(imgClose),
         
-        aClose.onclick = function(){
+        aClose.onclick = function() {
             content.removeChild(appWindow);
         };
         

@@ -48,23 +48,23 @@ var ImageViewer = {
     
     renderImages: function() {
         
-      ImageViewer.imageArr.forEach(function(currentImage) {
-         var image = document.createElement("img");
-         image.src = currentImage.thumbURL;
-         
-         var imgContainer = document.createElement("a");
-         imgContainer.classList.add("imgContainer");
-         imgContainer.href = "#";
-         imgContainer.style.width = ImageViewer.thumbWidth + "px";
-         imgContainer.style.height = ImageViewer.thumbHeight + "px";
-         
-         imgContainer.onclick = function() {
-             document.querySelector("#content").style.background = "url(" + currentImage.URL + ")";
-         };
-         
-         imgContainer.appendChild(image);
-
-         document.querySelector(".imageviewer").appendChild(imgContainer);
-      });
+        ImageViewer.imageArr.forEach(function(currentImage) {
+            var image = document.createElement("img");
+            image.src = currentImage.thumbURL;
+            
+            var imgContainer = document.createElement("a");
+            imgContainer.classList.add("imgContainer");
+            imgContainer.href = "#";
+            imgContainer.style.width = ImageViewer.thumbWidth + "px";
+            imgContainer.style.height = ImageViewer.thumbHeight + "px";
+            
+            imgContainer.onclick = function() {
+                document.querySelector("#content").style.background = "url(" + currentImage.URL + ")";
+            };
+            
+            imgContainer.appendChild(image);
+            
+            document.querySelector(".imageviewer").appendChild(imgContainer);
+        });
     },
 };
