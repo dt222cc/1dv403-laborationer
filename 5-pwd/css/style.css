@@ -99,8 +99,14 @@ a:focus, a:hover {
 
 /*******Image Viewer*******/
 .ImageViewer {
-    width: 300px;
+    width: 330px;
 }
+
+.imageviewer {
+    height: 350px;
+    overflow-y: scroll;
+}
+
 .imgContainer {
     float: left;
     padding: 5px;
